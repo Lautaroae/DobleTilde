@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getProducts } from "./ApiCore";
 import Card from "./Card";
+import { Prueba } from "./ProductsElement";
 
 const Products = (req, res) => {
   const [product, setProduct] = useState([]);
@@ -16,21 +17,17 @@ const Products = (req, res) => {
       }
     });
   };
-
   useEffect(() => {
     loadProduct();
   }, []);
-
   return (
-    <>
-      <div>
-        {product.map((products, i) => (
-          <div key={i}>
-            <Card product={products} />
-          </div>
-        ))}
-      </div>
-    </>
+    <Prueba>
+      {product.map((products, i) => (
+        <div key={i}>
+          <Card product={products} />
+        </div>
+      ))}
+    </Prueba>
   );
 };
 
