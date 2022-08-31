@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import ShowImage from "./ShowImage";
-import { ProductContainer } from "./ProductsElement";
+import "./ProductsElement.css";
 
 const Card = ({ product }) => {
   const [count, setCount] = useState(product.count);
 
   return (
     <>
-      <ProductContainer>
+      <div className="productContainer">
         <div className="card">
           <div className="face front">
             <ShowImage item={product} url="product" />
@@ -17,12 +17,9 @@ const Card = ({ product }) => {
           <div className="face back">
             <h3>{product.product}</h3>
             <p>{product.description}</p>
-            {/* <div className="link">
-              <a href="/">Detalles</a>
-            </div> */}
           </div>
         </div>
-      </ProductContainer>
+      </div>
     </>
   );
 };
