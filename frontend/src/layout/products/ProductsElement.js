@@ -72,6 +72,7 @@ export const ProductContainer = styled.div`
 
   .card .back p {
     letter-spacing: 1px;
+    margin: auto;
   }
 
   .card:hover .front {

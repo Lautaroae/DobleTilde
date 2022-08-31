@@ -26,6 +26,7 @@ mongoose
 //routes
 app.use("/api/category", require("./routes/category"));
 app.use("/api/product", require("./routes/product"));
+app.use("/api/auth", require("./routes/auth"));
 
 //Listen to port
 const port = process.env.PORT;
