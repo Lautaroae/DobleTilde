@@ -6,7 +6,7 @@ import Navbar from "./layout/navbar/Navbar";
 import Footer from "./layout/footer/Footer";
 import About from "./core/About";
 import Contact from "./core/Contact";
-import SignIn from "./core/SignIn";
+import Signin from "./core/SignIn";
 import Signup from "./core/Signup";
 import Products from "./layout/products/Products";
 import "./App.css";
@@ -21,8 +21,8 @@ const Router = () => {
         <Route path="/productById" element={<Search />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/signIn" element={<SignIn />} />
-        <Route path="/signUp" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
     </BrowserRouter>

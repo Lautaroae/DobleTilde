@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ShowImage from "./ShowImage";
 import { ProductContainer } from "./ProductsElement";
 
 const Card = ({ product }) => {
@@ -10,7 +9,7 @@ const Card = ({ product }) => {
       <ProductContainer>
         <div className="card">
           <div className="face front">
-            <ShowImage item={product} url="product" />
+            <img src={product.image} alt={product} />
             <h3>{product.product}</h3>
           </div>
           <div className="face back">

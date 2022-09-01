@@ -21,8 +21,8 @@ exports.create = (req, res) => {
           error: "Image should be less than 1MB in size",
         });
       }
-      // products.image.data = fs.readFileSync(files.image.path);
-      // products.image.contentType = files.image.type;
+      products.image.data = fs.readFileSync(files.image.path);
+      products.image.contentType = files.image.type;
     }
     products.save((err, result) => {
       if (err) {
@@ -38,7 +38,6 @@ exports.list = (req, res) => {
   let order = req.query.order ? req.query.order : "asc";
   let sortBy = req.query.sortBy ? req.query.sortBy : "product";
   Product.find()
-    .select("-image")
     .populate("category")
     .sort([[sortBy, order]])
     .exec((err, products) => {

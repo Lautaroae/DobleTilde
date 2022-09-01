@@ -20,3 +20,33 @@ exports.signup = (req, res) => {
     });
   });
 };
+
+exports.signin = (req, res) => {
+  const { email, password } = req.body;
+  User.findOne({ email }, (error, user) => {
+    if (error || !user) {
+      return res.status(400).json({
+        error: errorHandler(error),
+      });
+    }
+    if (!user.authenticate(password)) {
+      return res.status(401).json({
+        error: errorHandler(error),
+      });
+    }
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    res.cookie("t", token, { expire: new Date() + 9999 });
+    const { _id, email, role } = user;
+    return res.json({ token, user: { _id, email, role } });
+  });
+};
+
+// exports.isAdmin = (req, res, next) => {
+//   let user = req.profile && req.auth && req.profile._id == req.auth._id;
+//   if (!user) {
+//     return res.status(403).json({
+//       error: errorHandler(error),
+//     });
+//   }
+//   next();
+// };

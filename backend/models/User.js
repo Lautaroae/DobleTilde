@@ -1,6 +1,5 @@
-const uuidv1 = require("uuid");
-const crypto = require("crypto");
 const mongoose = require("mongoose");
+const crypto = require("crypto");
 
 const userSchema = new mongoose.Schema(
   {
@@ -14,7 +13,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    salt: String,
+
     role: {
       type: Number,
       default: 0,
@@ -27,7 +26,7 @@ userSchema
   .virtual("password")
   .set(function (password) {
     this._password = password;
-    this.salt = uuidv1();
+
     this.hashed_password = this.encryptPassword(password);
   })
   .get(function () {
@@ -35,16 +34,13 @@ userSchema
   });
 
 userSchema.methods = {
-  authenticate: function (password) {
+  authenticate: function (plainText) {
     return this.encryptPassword(plainText) === this.hashed_password;
   },
   encryptPassword: function (password) {
     if (!password) return "";
     try {
-      return crypto
-        .createHmac("sha1", this.salt)
-        .update(password)
-        .digest("hex");
+      return crypto.update(password).digest("hex");
     } catch (err) {
       return "";
     }
