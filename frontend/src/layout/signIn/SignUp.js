@@ -2,6 +2,7 @@ import React from "react";
 import { FormContainer, NavBtn, NavBtnLink } from "./userElement";
 
 const SignUp = () => {
+  const SignUpForm = () => {};
   return (
     <>
       <FormContainer>

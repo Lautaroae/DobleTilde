@@ -13,8 +13,17 @@ import {
 import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
+import { isAuthenticated, signout } from "../products/ApiCore";
 
-const NavBar = ({ toggle }) => {
+const isActive = (history, path) => {
+  if (history.location.pathname === true) {
+    return { color: "#ff9900" };
+  } else {
+    return { color: "#ffffff" };
+  }
+};
+
+const NavBar = ({ toggle, history }) => {
   const [scrollNav, setScrollNav] = useState(false);
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -83,21 +92,28 @@ const NavBar = ({ toggle }) => {
                   Contacto
                 </NavLinks>
               </NavItem>
-              <NavItem>
-                {/* <NavLinks
-                  to="/signUp"
-                  // smooth={true}
-                  duration={500}
-                  // spy={true}
-                  exact="true"
-                  offset={0}
-                >
-                  Regístrate
-                </NavLinks> */}
-              </NavItem>
+              <NavItem></NavItem>
             </NavMenu>
             <NavBtn>
-              <NavBtnLink to="/signin"> Iniciar sesión</NavBtnLink>
+              {!isAuthenticated() && (
+                <>
+                  <NavBtnLink to="/signin"> Iniciar sesión</NavBtnLink>
+                </>
+              )}
+              {isAuthenticated() && (
+                <>
+                  <NavBtnLink
+                    to="/"
+                    onClick={() =>
+                      signout(() => {
+                        history.push("/");
+                      })
+                    }
+                  >
+                    Cerrar sesión
+                  </NavBtnLink>
+                </>
+              )}
             </NavBtn>
           </NavBarContainer>
         </Nav>

@@ -8,7 +8,7 @@ const SignIn = () => {
     email: "",
     password: "",
     error: "",
-    success: false,
+    loading: false,
     redirectToReferrer: false,
   });
 

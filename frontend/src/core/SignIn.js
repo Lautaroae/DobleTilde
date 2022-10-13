@@ -1,10 +1,10 @@
 import React from "react";
-import SignIns from "../layout/signIn/SignIn";
+import SignIn from "../layout/signIn/SignIn";
 
-const SignIn = () => {
+const SignIns = () => {
   return (
     <>
-      <SignIns />
+      <SignIn />
     </>
   );
 };

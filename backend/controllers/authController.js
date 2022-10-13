@@ -26,26 +26,31 @@ exports.signin = (req, res) => {
   User.findOne({ email }, (error, user) => {
     if (error || !user) {
       return res.status(400).json({
-        error: errorHandler(error),
+        error: "User with that email does not exist",
       });
     }
     if (!user.authenticate(password)) {
       return res.status(401).json({
-        error: errorHandler(error),
+        error: "Email and password don't match",
       });
     }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
     res.cookie("t", token, { expire: new Date() + 9999 });
-    const { _id, email, role } = user;
-    return res.json({ token, user: { _id, email, role } });
+    const { _id, name, email, role } = user;
+    return res.json({ token, user: { _id, name, email, role } });
   });
+};
+
+exports.signout = (req, res) => {
+  res.clearCookie("t");
+  res.json({ message: "signout success" });
 };
 
 // exports.isAdmin = (req, res, next) => {
 //   let user = req.profile && req.auth && req.profile._id == req.auth._id;
 //   if (!user) {
 //     return res.status(403).json({
-//       error: errorHandler(error),
+//       error: "Access denied",
 //     });
 //   }
 //   next();
